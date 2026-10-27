@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <title>Ruby gemstone</title>
+  <rect width="400" height="400" fill="#ffffff"/>
+  <g stroke="#7f0018" stroke-width="3" stroke-linejoin="round">
+    <path d="M95 115 L145 65 L255 65 L305 115 L270 275 L200 335 L130 275 Z" fill="#e11d48"/>
+    <path d="M95 115 L170 115 L145 65 Z" fill="#fb7185"/>
+    <path d="M170 115 L200 65 L255 65 L230 115 Z" fill="#f43f5e"/>
+    <path d="M170 115 L230 115 L200 205 Z" fill="#be123c"/>
+    <path d="M95 115 L170 115 L130 275 Z" fill="#9f1239"/>
+    <path d="M230 115 L305 115 L270 275 Z" fill="#881337"/>
+    <path d="M130 275 L200 205 L270 275 L200 335 Z" fill="#e11d48"/>
+    <path d="M200 205 L200 335 L130 275 Z" fill="#be123c"/>
+    <path d="M200 205 L270 275 L230 115 Z" fill="#f43f5e"/>
+  </g>
+</svg>
