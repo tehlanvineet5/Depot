@@ -1,0 +1,14 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <rect width="400" height="100" fill="#064b19"/>
+  <polygon points="0,0 180,0 155,100 20,100" fill="#76ff76"/>
+  <text x="88" y="35" text-anchor="middle"
+        font-family="Georgia, serif" font-size="22"
+        font-weight="bold" fill="#102b10">The</text>
+  <text x="88" y="56" text-anchor="middle"
+        font-family="Georgia, serif" font-size="22"
+        font-weight="bold" fill="#102b10">Pragmatic</text>
+  <text x="88" y="77" text-anchor="middle"
+        font-family="Georgia, serif" font-size="22"
+        font-weight="bold" fill="#102b10">Bookshelf</text>
+</svg>
