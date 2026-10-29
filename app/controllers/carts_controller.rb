@@ -53,6 +53,7 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
 
     respond_to do |format|
+      format.turbo_stream
       format.html {
         redirect_to store_index_path,
           status: :see_other,
