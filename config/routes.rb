@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  get "admin" => "admin#index"
+  resources :users
+  resource :session
+  resources :passwords, param: :token
   resources :orders
   resources :line_items
   resources :carts
-  root "store#index", as: "store_index"
+  root "store#index"
+  get "/", to: "store#index", as: :store_index
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
