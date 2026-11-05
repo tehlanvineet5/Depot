@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # root "store#index"
   # get "/", to: "store#index", as: :store_index
   resources :products
+  resources :support_requests, only: %i[ index update ]
   scope "(:locale)" do
     resources :orders
     resources :line_items
