@@ -42,7 +42,7 @@
                            length: 80) %>
             </p>
             <p>
-              <%= number_to_currency(product.price) %>
+              <%= number_to_currency(product.price, unit: "₹", precision: 2) %>
             </p>
           </td>
 
