@@ -67,9 +67,17 @@ class CartsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
-      @cart = Cart.find(params.expect(:id))
-    end
+      requested_cart_id = params.expect(:id)
+      current_cart_id = session[:cart_id]
 
+      if current_cart_id.blank? || requested_cart_id.to_s != current_cart_id.to_s
+        redirect_to store_index_url,
+          alert: "You cannot access another user's cart."
+        return
+      end
+
+      @cart = Cart.find(current_cart_id)
+    end
     # Only allow a list of trusted parameters through.
     def cart_params
       params.fetch(:cart, {})

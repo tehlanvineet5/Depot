@@ -2,7 +2,7 @@
   <h2 class="font-bold text-lg mb-3"><%= t('.title') %></h2>
 
   <table class="table-auto">
-    <%= render cart.line_items %>
+    <%= render cart.line_items, show_remove_button: true %>
 
     <tfoot>
       <tr>
