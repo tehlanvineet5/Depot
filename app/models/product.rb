@@ -8,6 +8,10 @@ class Product < ApplicationRecord
   validates :title, :description, :image, presence: true
   validates :title, uniqueness: true
   validate :acceptable_image
+  validates :title, length: {
+    minimum: 10,
+    message: "must contain at least 10 characters"
+  }
 
   def acceptable_image
     return unless image.attached?
