@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_06_110931) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_094256) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -83,6 +83,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_06_110931) do
     t.integer "pay_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "routing_number"
+    t.string "account_number"
+    t.string "credit_card_number"
+    t.string "expiration_date"
+    t.integer "po_number"
   end
 
   create_table "products", force: :cascade do |t|
