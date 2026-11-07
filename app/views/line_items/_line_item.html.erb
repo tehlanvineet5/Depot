@@ -5,6 +5,12 @@
 <% end %>
   <td class="text-right">
     <%= line_item.quantity %>
+    <% if local_assigns[:show_decrement_button] %>
+        <%= button_to "−",
+            decrement_line_item_path(line_item),
+            method: :patch,
+            class: "rounded bg-gray-200 px-3 py-1" %>
+    <% end %>
   </td>
 
   <td>&times;</td>
