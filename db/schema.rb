@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_05_085326) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_12_101038) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_085326) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "line_items_count", default: 0, null: false
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -70,6 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_085326) do
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
     t.integer "order_id"
+    t.decimal "price", precision: 8, scale: 2
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
     t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
@@ -82,6 +84,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_085326) do
     t.integer "pay_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "routing_number"
+    t.string "account_number"
+    t.string "credit_card_number"
+    t.string "expiration_date"
+    t.integer "po_number"
   end
 
   create_table "products", force: :cascade do |t|
@@ -90,6 +97,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_085326) do
     t.decimal "price", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: false
+    t.decimal "discount_price"
+    t.string "permalink"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -117,6 +127,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_05_085326) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
