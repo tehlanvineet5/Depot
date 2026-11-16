@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
   has_many :line_items
 
+  after_initialize :set_default_title
+  before_validation :set_discount_price, on: :create
   before_destroy :ensure_not_referenced_by_any_line_item
 
   has_one_attached :image
@@ -13,7 +15,7 @@ class Product < ApplicationRecord
   validate :description_word_count
   # validate :discount_price_less_than_price
   validates :discount_price,
-    comparison: { less_than: :price },
+    comparison: { less_than_or_equal_to: :price },
     if: -> { discount_price.present? && price.present? }
 
   def acceptable_image
@@ -52,5 +54,13 @@ class Product < ApplicationRecord
       errors.add(:base, "Line Items present")
       throw :abort
     end
+  end
+
+  def set_default_title
+    self.title ||= "abc"
+  end
+
+  def set_discount_price
+    self.discount_price ||= price
   end
 end
