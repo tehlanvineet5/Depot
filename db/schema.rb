@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_12_101038) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_13_113903) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_101038) do
     t.decimal "price", precision: 8, scale: 2
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
     t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id", "cart_id"], name: "index_line_items_on_product_and_cart", unique: true
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
