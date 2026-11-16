@@ -6,7 +6,7 @@ class User < ApplicationRecord
     format: { with: URI::MailTo::EMAIL_REGEXP }
   has_secure_password
   has_many :sessions, dependent: :destroy
-  after_create :send_welcome_email
+  after_create_commit :send_welcome_email
   before_update :ensure_admin_cannot_be_updated
   before_destroy :prevent_admin_deletion
 
