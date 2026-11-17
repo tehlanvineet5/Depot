@@ -1,9 +1,10 @@
 class Product < ApplicationRecord
-  has_many :line_items
+  has_many :line_items, dependent: :restrict_with_error
+  has_many :carts, through: :line_items
 
   after_initialize :set_default_title
   before_validation :set_discount_price, on: :create
-  before_destroy :ensure_not_referenced_by_any_line_item
+  # before_destroy :ensure_not_referenced_by_any_line_item
 
   has_one_attached :image
   after_commit -> { broadcast_refresh_later_to "products" }
