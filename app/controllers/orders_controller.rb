@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_cart, only: %i[ new create ]
   before_action :ensure_cart_isnt_empty, only: %i[ new ]
   before_action :set_order, only: %i[ show edit update destroy ]
-  allow_unauthenticated_access only: %i[new create]
+  # allow_unauthenticated_access only: %i[new create]
 
   # GET /orders or /orders.json
   def index
@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
+    @order.user = Current.user if Current.user.present?
     @order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
