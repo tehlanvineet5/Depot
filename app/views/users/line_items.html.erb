@@ -1,0 +1,20 @@
+<h1>My Line Items</h1>
+<br>
+<% @line_items.each do |item| %>
+  <h3><%= item.product.title %></h3>
+  <p>
+    Quantity: <%= item.quantity %>
+    <br>
+    Price: <%= number_to_currency(item.total_price) %>
+    <br>
+    Order ID: <%= item.order_id %>
+  </p>
+  <hr>
+<% end %>
+<p>Page <%= @page %> of <%= @total_pages %></p>
+<% if @page > 1 %>
+  <%= link_to "Previous", line_items_users_path(page: @page - 1) %>
+<% end %>
+<% if @page < @total_pages %>
+  <%= link_to "Next", line_items_users_path(page: @page + 1) %>
+<% end %>

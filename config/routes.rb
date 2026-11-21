@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get "admin" => "admin#index"
-  resources :users
+  resources :users do
+    collection do
+      get :orders
+      get :line_items
+    end
+  end
   resource :session
   resources :passwords, param: :token
   # root "store#index"

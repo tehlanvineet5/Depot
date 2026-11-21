@@ -61,6 +61,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def orders
+    @orders = Current.user.orders.includes(:line_items)
+  end
+
+  def line_items
+      @page = [ params.fetch(:page, 1).to_i, 1 ].max
+      @line_items = Current.user.line_items.includes(:product).order(created_at: :desc).limit(5).offset((@page - 1) * 5)
+
+      @total_pages = (Current.user.line_items.count / 5.0).ceil
+  end
 rescue_from "User::Error" do |exception|
   redirect_to users_url, notice: exception.message
 end
