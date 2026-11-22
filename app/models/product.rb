@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   after_initialize :set_default_title
   before_validation :set_discount_price, on: :create
   # before_destroy :ensure_not_referenced_by_any_line_item
+  scope :enabled, -> { where(enabled: true) }
 
   has_one_attached :image
   after_commit -> { broadcast_refresh_later_to "products" }
@@ -28,6 +29,17 @@ class Product < ApplicationRecord
     end
   end
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
+
+  def self.products_in_atleast_one_line_item
+    joins(:line_items).distinct
+  end
+
+  def self.title_of_products_in_atleast_one_line_item
+    joins(:line_items).distinct.pluck(:title)
+  end
+  def self.titles_using_associated
+    where.associated(:line_items).distinct.pluck(:title)
+  end
 
   def description_word_count
     return if description.blank?
