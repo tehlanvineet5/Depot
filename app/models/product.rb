@@ -1,11 +1,14 @@
 class Product < ApplicationRecord
   has_many :line_items, dependent: :restrict_with_error
   has_many :carts, through: :line_items
+  belongs_to :category, optional: true, counter_cache: true
 
   after_initialize :set_default_title
   before_validation :set_discount_price, on: :create
   # before_destroy :ensure_not_referenced_by_any_line_item
   scope :enabled, -> { where(enabled: true) }
+  after_save :product_count_on_save, if: :saved_change_to_category_id?
+  after_destroy :product_count_on_destroy
 
   has_one_attached :image
   after_commit -> { broadcast_refresh_later_to "products" }
@@ -75,5 +78,26 @@ class Product < ApplicationRecord
 
   def set_discount_price
     self.discount_price ||= price
+  end
+
+  def increment_product_count(category_id)
+    parent_category = Category.find_by(id: category_id)&.parent
+    parent_category.increment!(:products_count) if parent_category
+  end
+
+  def decrement_product_count(category_id)
+    parent_category = Category.find_by(id: category_id)&.parent
+    parent_category.decrement!(:products_count) if parent_category
+  end
+
+  def product_count_on_save
+    if category_id_previously_was != category_id
+      decrement_product_count(category_id_previously_was) if category_id_previously_was
+      increment_product_count(category_id) if category_id
+    end
+  end
+
+  def product_count_on_destroy
+    decrement_product_count(category_id) if category_id
   end
 end
